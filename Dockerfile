@@ -1,4 +1,3 @@
-
 # Базовый образ с Python
 FROM python:3.9-slim
 
@@ -12,11 +11,14 @@ RUN apt-get update && apt-get install -y \
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы проекта в контейнер
-COPY . /app
+# Копируем только файл requirements.txt
+COPY requirements.txt .
 
 # Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем остальные файлы проекта
+COPY . .
 
 # Создаем static файлы
 RUN python manage.py collectstatic --noinput
@@ -29,6 +31,3 @@ EXPOSE 8000
 
 # Команда для запуска проекта
 CMD ["bash", "run.sh"]
-
-
-

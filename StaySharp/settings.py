@@ -80,9 +80,6 @@ WSGI_APPLICATION = "StaySharp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-import pymysql
-pymysql.install_as_MySQLdb()
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
