@@ -3,7 +3,7 @@ FROM python:3.9-slim
 
 # Устанавливаем зависимости для Django и Home Assistant add-on
 RUN apt-get update && \
-    apt-get install -y gcc libpq-dev default-libmysqlclient-dev && \
+    apt-get install -y gcc libpq-dev default-libmysqlclient-dev pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем рабочую директорию
