@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'crispy_forms',
     'import_export',
-    'psycopg2',
     'django_cleanup',
     'dj_database_url',
     'social.apps.django_app.default',
