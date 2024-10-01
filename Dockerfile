@@ -3,7 +3,7 @@ FROM python:3.9-slim
 
 # Устанавливаем зависимости для Django и Home Assistant add-on
 RUN apt-get update && \
-    apt-get install -y gcc libpq-dev && \
+    apt-get install -y gcc libpq-dev default-libmysqlclient-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем рабочую директорию
@@ -15,6 +15,9 @@ COPY . /app
 # Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Устанавливаем библиотеку для работы с MariaDB
+RUN pip install mysqlclient
+
 # Создаем static файлы
 RUN python manage.py collectstatic --noinput
 
@@ -25,5 +28,6 @@ ENV DJANGO_SETTINGS_MODULE=StaySharp.settings
 EXPOSE 8000
 
 # Команда для запуска проекта
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["bash", "run.sh"]
+
 

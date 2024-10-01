@@ -1,4 +1,24 @@
 #!/usr/bin/env bash
-python manage.py migrate  # Применение миграций базы данных
-python manage.py runserver 0.0.0.0:8000  # Запуск сервера
+
+# Экспортируем переменные окружения из конфигурации аддона
+export DB_USER=$(jq -r '.db_user' /data/options.json)
+export DB_PASSWORD=$(jq -r '.db_password' /data/options.json)
+export DB_NAME=$(jq -r '.db_name' /data/options.json)
+export DB_HOST=$(jq -r '.db_host' /data/options.json)
+export DB_PORT=$(jq -r '.db_port' /data/options.json)
+
+# Проверяем наличие архивного файла и импортируем его в MariaDB
+if [ -f /app/backup.sql ]; then
+    echo "Импортируем данные из backup.sql в MariaDB..."
+    mysql -u "$DB_USER" -p"$DB_PASSWORD" -h "$DB_HOST" "$DB_NAME" < /app/backup.sql
+else
+    echo "Архивный файл backup.sql не найден. Пропускаем импорт."
+fi
+
+# Применение миграций базы данных
+python manage.py migrate
+
+# Запуск сервера
+python manage.py runserver 0.0.0.0:8000
+
 
