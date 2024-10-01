@@ -1,9 +1,11 @@
+
 # Базовый образ с Python
 FROM python:3.9-slim
 
-# Устанавливаем зависимости для Django и Home Assistant add-on
+# Устанавливаем зависимости для Django и MariaDB
+# Исправлено: добавлены зависимости для MariaDB (libmariadb-dev)
 RUN apt-get update && \
-    apt-get install -y gcc libpq-dev && \
+    apt-get install -y gcc libmariadb-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем рабочую директорию
@@ -25,4 +27,5 @@ ENV DJANGO_SETTINGS_MODULE=StaySharp.settings
 EXPOSE 8000
 
 # Команда для запуска проекта
+# Изменено: запуск через runserver для разработки
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

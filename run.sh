@@ -25,5 +25,6 @@ echo "Applying database migrations..."
 python manage.py migrate
 
 # Запуск сервера
-echo "Starting Django server..."
-gunicorn StaySharp.wsgi:application --bind 0.0.0.0:8000
+# Изменено: запуск через runserver для разработки
+echo "Starting Django server with runserver..."
+python manage.py runserver 0.0.0.0:8000
