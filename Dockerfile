@@ -1,9 +1,9 @@
 # Базовый образ с Python
 FROM python:3.9-slim
 
-# Устанавливаем pkg-config и необходимые зависимости для MariaDB/MySQL
+# Устанавливаем зависимости для PostgreSQL (libpq-dev), MariaDB (libmariadb-dev) и pkg-config
 RUN apt-get update && \
-    apt-get install -y gcc libmariadb-dev pkg-config && \
+    apt-get install -y gcc libmariadb-dev libpq-dev pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем рабочую директорию
@@ -16,7 +16,6 @@ COPY . /app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Экспортируем переменные окружения для mysqlclient
-# Эти переменные необходимы для правильной сборки
 ENV MYSQLCLIENT_CFLAGS="$(mysql_config --cflags)"
 ENV MYSQLCLIENT_LDFLAGS="$(mysql_config --libs)"
 
