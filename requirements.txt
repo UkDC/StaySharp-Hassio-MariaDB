@@ -204,7 +204,7 @@ matplotlib-inline==0.1.6
     # via
     #   -r requirements.txt
     #   ipython
-mysqlclient==2.2.4
+mysqlclient==2.1.1
     # via -r requirements.txt
 numba==0.56.3
     # via -r requirements.txt
