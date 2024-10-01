@@ -99,6 +99,7 @@ WSGI_APPLICATION = "StaySharp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# for sqlite3
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.sqlite3",
@@ -106,6 +107,22 @@ WSGI_APPLICATION = "StaySharp.wsgi.application"
 #         'TIME_ZONE': TIME_ZONE,
 #     }
 # }
+
+# for mysql
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': os.getenv('DB_NAME', 'your_database'),
+#         'USER': os.getenv('DB_USER', 'your_user'),
+#         'PASSWORD': os.getenv('DB_PASSWORD', 'your_password'),
+#         'HOST': os.getenv('DB_HOST', 'localhost'),
+#         'PORT': os.getenv('DB_PORT', '3306'),
+#     }
+# }
+
+# for pymysql
+import pymysql
+pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
@@ -117,6 +134,7 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT', '3306'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

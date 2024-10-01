@@ -204,7 +204,7 @@ matplotlib-inline==0.1.6
     # via
     #   -r requirements.txt
     #   ipython
-mysqlclient==2.2.4
+# mysqlclient==2.2.4
     # via -r requirements.txt
 numba==0.56.3
     # via -r requirements.txt
@@ -436,3 +436,5 @@ zope-interface==5.5.0
 # The following packages are considered to be unsafe in a requirements file:
 # pip
 # setuptools
+
+PyMySQL~=1.1.1
