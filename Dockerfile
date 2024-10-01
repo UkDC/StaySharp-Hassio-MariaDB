@@ -1,11 +1,9 @@
-
 # Базовый образ с Python
 FROM python:3.9-slim
 
-# Устанавливаем зависимости для Django и MariaDB
-# Исправлено: добавлены зависимости для MariaDB (libmariadb-dev)
+# Устанавливаем pkg-config и необходимые зависимости для MariaDB/MySQL
 RUN apt-get update && \
-    apt-get install -y gcc libmariadb-dev && \
+    apt-get install -y gcc libmariadb-dev pkg-config && \
     rm -rf /var/lib/apt/lists/*
 
 # Устанавливаем рабочую директорию
@@ -17,6 +15,11 @@ COPY . /app
 # Устанавливаем зависимости
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Экспортируем переменные окружения для mysqlclient
+# Эти переменные необходимы для правильной сборки
+ENV MYSQLCLIENT_CFLAGS="$(mysql_config --cflags)"
+ENV MYSQLCLIENT_LDFLAGS="$(mysql_config --libs)"
+
 # Создаем static файлы
 RUN python manage.py collectstatic --noinput
 
@@ -27,5 +30,4 @@ ENV DJANGO_SETTINGS_MODULE=StaySharp.settings
 EXPOSE 8000
 
 # Команда для запуска проекта
-# Изменено: запуск через runserver для разработки
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
