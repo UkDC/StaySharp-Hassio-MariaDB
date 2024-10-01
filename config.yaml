@@ -1,7 +1,8 @@
-name: StaySharp
+name: "StaySharp"
 description: "Калькулятор Tormek T-8"
-version: "1.0.0"
-slug: staysharp_hassio_mariadb
+version: "1.0.1"
+slug: "staysharp_hassio_mariadb"
+init: false
 arch:
   - armv7
   - aarch64
@@ -12,26 +13,28 @@ boot: auto
 ports:
   8000/tcp: 8000
 options:
-  db_user: "your_user"
-  db_password: "your_password"
-  db_name: "your_database"
-  db_host: "localhost"
+  db_user: null
+  db_password: null
+  db_name: null
+  db_host: core-mariadb
   db_port: 3306
-schema: {}
-
-# Home Assistant API доступ
+  admin_username: null
+  admin_password: null
+  admin_email: null
+schema:
+  db_user: str
+  db_password: password
+  db_name: str
+  db_host: str
+  db_port: int
+  admin_username: str
+  admin_password: password
+  admin_email: email
 homeassistant: true
-
-# Точка монтирования
 map:
   - config:rw
   - ssl
   - addons:rw
   - backup:rw
   - share:rw
-
-# Установка зависимости при сборке
-init: false
-
 webui: "http://[HOST]:[PORT:8000]"
-
