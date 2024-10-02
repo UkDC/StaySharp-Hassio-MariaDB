@@ -103,7 +103,7 @@ DATABASES = {
         'NAME': 'your_db_name',
         'USER': 'your_db_user',
         'PASSWORD': 'your_password',
-        'HOST': 'localhost',
+        'HOST': 'core-mariadb',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
