@@ -8,7 +8,13 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     python3-dev \
     jq \
+    pkg-config \
+    libmariadb-dev-compat \
+    libmariadb-dev \
+    libmysqlclient-dev \
+    mariadb-client \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Устанавливаем зависимости Python
 COPY requirements.txt /app/requirements.txt
