@@ -100,16 +100,53 @@ WSGI_APPLICATION = "StaySharp.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'your_db_name',
-        'USER': 'your_db_user',
-        'PASSWORD': 'your_password',
-        'HOST': 'core-mariadb',
-        'PORT': '3306',
+        'HOST': os.environ.get('DB_HOST', 'core-mariadb'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
+        'NAME': os.environ.get('DB_NAME', 'homeassistant'),
+        'USER': os.environ.get('DB_USER', 'user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
     }
 }
+
+
+# Определяем, запущено ли приложение в Docker-контейнере
+IN_DOCKER = os.environ.get('IN_DOCKER', False)
+
+if IN_DOCKER:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'file': {
+                'level': 'INFO',
+                'class': 'logging.FileHandler',
+                'filename': '/config/django.log',
+            },
+        },
+        'root': {
+            'handlers': ['file'],
+            'level': 'INFO',
+        },
+    }
+else:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'level': 'INFO',
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'root': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+    }
+
 
 
 # DATABASES = {

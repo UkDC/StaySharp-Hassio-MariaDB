@@ -1,30 +1,50 @@
 #!/usr/bin/env bash
 set -e
 
-# Функция для проверки доступности базы данных
-wait_for_db() {
-    echo "Waiting for database..."
-    while ! mysqladmin ping -h"$DB_HOST" -P"$DB_PORT" -u"$DB_USER" -p"$DB_PASSWORD" --silent; do
-        sleep 1
-    done
-    echo "Database is available"
+# Функция для чтения параметров конфигурации
+get_config() {
+    jq --raw-output ".$1" /data/options.json
 }
 
-# Экспорт переменных окружения
-export DB_USER=$(jq -r '.db_user // empty' /data/options.json)
-export DB_PASSWORD=$(jq -r '.db_password // empty' /data/options.json)
-export DB_NAME=$(jq -r '.db_name // empty' /data/options.json)
-export DB_HOST=$(jq -r '.db_host // empty' /data/options.json)
-export DB_PORT=$(jq -r '.db_port // empty' /data/options.json)
+# Читаем параметры конфигурации
+DB_HOST=$(get_config 'db_host')
+DB_PORT=$(get_config 'db_port')
+DB_NAME=$(get_config 'db_name')
+DB_USER=$(get_config 'db_user')
+DB_PASSWORD=$(get_config 'db_password')
+CREATE_SUPERUSER=$(get_config 'create_superuser')
+SUPERUSER_USERNAME=$(get_config 'superuser_username')
+SUPERUSER_EMAIL=$(get_config 'superuser_email')
+SUPERUSER_PASSWORD=$(get_config 'superuser_password')
 
-# Ожидание доступности базы данных
-wait_for_db
+# Экспортируем переменные окружения для Django
+export DB_HOST DB_PORT DB_NAME DB_USER DB_PASSWORD
 
-# Применение миграций
-echo "Applying database migrations..."
-python manage.py migrate
+# Выполняем миграции
+python manage.py migrate --noinput
 
-# Запуск сервера
-# Изменено: запуск через runserver для разработки
-echo "Starting Django server with runserver..."
+# Создаем суперпользователя, если указано в настройках
+if [ "$CREATE_SUPERUSER" = "true" ]; then
+    echo "Создаем суперпользователя..."
+    echo "from django.contrib.auth import get_user_model; \
+User = get_user_model(); \
+User.objects.filter(username='$SUPERUSER_USERNAME').exists() or \
+User.objects.create_superuser('$SUPERUSER_USERNAME', '$SUPERUSER_EMAIL', '$SUPERUSER_PASSWORD')" | python manage.py shell
+fi
+
+# Импортируем данные из initial_data.json при первом запуске
+if [ ! -f /config/db_initialized ]; then
+    if [ -f /app/initial_data.json ]; then
+        echo "Импортируем данные из initial_data.json..."
+        python manage.py loaddata initial_data.json
+    else
+        echo "Файл initial_data.json не найден. Пропускаем импорт данных."
+    fi
+    touch /config/db_initialized
+fi
+
+# Собираем статические файлы
+python manage.py collectstatic --noinput
+
+# Запускаем сервер Django
 python manage.py runserver 0.0.0.0:8000

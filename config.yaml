@@ -1,9 +1,9 @@
 name: "StaySharp_MD"
 description: "Калькулятор Tormek T-8"
-version: "1.0.1"
+version: "1.0.0"
 slug: "staysharp_hassio_mariadb"
-init: false
 arch:
+  - armhf
   - armv7
   - aarch64
   - amd64
@@ -12,29 +12,26 @@ startup: services
 boot: auto
 ports:
   8000/tcp: 8000
+webui: http://[HOST]:[PORT:8000]
+host_network: false
 options:
-  db_user: null
-  db_password: null
-  db_name: null
-  db_host: core-mariadb
+  db_host: "core-mariadb"
   db_port: 3306
-  admin_username: null
-  admin_password: null
-  admin_email: null
+  db_name: "homeassistant"
+  db_user: "user"
+  db_password: "password"
+  create_superuser: false
+  superuser_username: "admin"
+  superuser_email: "admin@example.com"
+  superuser_password: "adminpassword"
 schema:
-  db_user: str
-  db_password: password
-  db_name: str
   db_host: str
   db_port: int
-  admin_username: str
-  admin_password: password
-  admin_email: email
-homeassistant: true
-map:
-  - config:rw
-  - ssl
-  - addons:rw
-  - backup:rw
-  - share:rw
-webui: "http://[HOST]:[PORT:8000]"
+  db_name: str
+  db_user: str
+  db_password: str
+  create_superuser: bool
+  superuser_username: str
+  superuser_email: str
+  superuser_password: str
+
