@@ -20,8 +20,9 @@ SUPERUSER_PASSWORD=$(get_config 'superuser_password')
 # Экспортируем переменные окружения для Django
 export DB_HOST DB_PORT DB_NAME DB_USER DB_PASSWORD
 
-# Выполняем миграции
-python manage.py migrate --noinput
+# Выполняем миграции с повышенной детализацией вывода
+python manage.py migrate --noinput --verbosity 2
+
 
 # Создаем суперпользователя, если указано в настройках
 if [ "$CREATE_SUPERUSER" = "true" ]; then
