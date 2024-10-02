@@ -29,7 +29,7 @@ RUN mkdir -p $CONFIG_PATH
 
 # Устанавливаем переменные окружения
 ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE=StaySharp.settings  # Замените на название вашего проекта
+ENV DJANGO_SETTINGS_MODULE=StaySharp.settings
 ENV IN_DOCKER=True
 
 # Экспонируем порт
