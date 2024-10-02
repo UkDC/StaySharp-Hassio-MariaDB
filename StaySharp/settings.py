@@ -97,19 +97,19 @@ WSGI_APPLICATION = "StaySharp.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 # Database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'HOST': os.environ.get('DB_HOST', 'core-mariadb'),
-#         'PORT': os.environ.get('DB_PORT', '3306'),
-#         'NAME': os.environ.get('DB_NAME', 'homeassistant'),
-#         'USER': os.environ.get('DB_USER', 'user'),
-#         'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
-#         'OPTIONS': {
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-#         },
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': os.environ.get('DB_HOST', 'core-mariadb'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
+        'NAME': os.environ.get('DB_NAME', 'homeassistant'),
+        'USER': os.environ.get('DB_USER', 'user'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'password'),
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}
 
 
 # Определяем, запущено ли приложение в Docker-контейнере
@@ -149,13 +149,13 @@ else:
 
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        'TIME_ZONE': TIME_ZONE,
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#         'TIME_ZONE': TIME_ZONE,
+#     }
+# }
 
 
 # Password validation
