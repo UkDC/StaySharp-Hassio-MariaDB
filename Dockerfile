@@ -1,6 +1,7 @@
 FROM python:3.9-slim
 
 # Устанавливаем системные зависимости
+# Устанавливаем системные зависимости
 RUN apt-get update && apt-get install -y \
     build-essential \
     default-libmysqlclient-dev \
@@ -11,7 +12,6 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     libmariadb-dev-compat \
     libmariadb-dev \
-    libmysqlclient-dev \
     mariadb-client \
     && rm -rf /var/lib/apt/lists/*
 
