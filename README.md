@@ -1,9 +1,5 @@
 # StaySharp
 
-
-
-# StaySharp
-
 ## Description
 
 **StaySharp** is an add-on for Home Assistant that provides a calculator for the Tormek T-8 sharpening machine. It allows you to calculate optimal sharpening parameters for tools, ensuring precision and efficiency in your work.
