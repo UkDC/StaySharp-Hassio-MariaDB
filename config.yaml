@@ -1,6 +1,6 @@
 name: "StaySharp_MD"
 description: "Tormek T-8 sharpening and honing angle calculator with recommendations for different steel types and brands"
-version: "1.0.0"
+version: "1.0.1"
 slug: "staysharp_hassio_mariadb"
 url: "https://github.com/UkDC/StaySharp-Hassio-MariaDB"
 arch:
@@ -26,15 +26,51 @@ options:
   superuser_email: "admin@example.com"
   superuser_password: "adminpassword"
 schema:
-  db_host: str
-  db_port: int
-  db_name: str
-  db_user: str
-  db_password: str
-  create_superuser: bool
-  superuser_username: str
-  superuser_email: str
-  superuser_password: str
+  - name: db_host
+    required: true
+    type: string
+    default: "core-mariadb"
+  - name: db_port
+    required: true
+    type: integer
+    default: 3306
+  - name: db_name
+    required: true
+    type: string
+    default: "homeassistant"
+  - name: db_user
+    required: true
+    type: string
+    default: "user"
+  - name: db_password
+    required: true
+    type: string
+    default: "password"
+  - name: create_superuser
+    required: true
+    type: boolean
+    default: false
+  - name: superuser_username
+    required: true
+    type: string
+    default: "admin"
+    condition:
+      - key: create_superuser
+        value: true
+  - name: superuser_email
+    required: true
+    type: string
+    default: "admin@example.com"
+    condition:
+      - key: create_superuser
+        value: true
+  - name: superuser_password
+    required: true
+    type: string
+    default: "adminpassword"
+    condition:
+      - key: create_superuser
+        value: true
 
 privileged: []
 full_access: false
