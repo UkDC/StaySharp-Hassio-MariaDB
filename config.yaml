@@ -13,7 +13,7 @@ startup: services
 boot: auto
 ports:
   8000/tcp: 8000
-webui: http://[HOST]:[PORT:8000]
+webui: "http://[HOST]:[PORT:8000]"
 host_network: false
 options:
   db_host: "core-mariadb"
@@ -54,27 +54,28 @@ schema:
     required: true
     type: string
     default: "admin"
-    conditions:
-      - key: create_superuser
-        equals: true
+    condition:
+      key: create_superuser
+      value: true
   - name: superuser_email
     required: true
     type: string
     default: "admin@example.com"
-    conditions:
-      - key: create_superuser
-        equals: true
+    condition:
+      key: create_superuser
+      value: true
   - name: superuser_password
     required: true
     type: string
-    default: "your_password"
-    conditions:
-      - key: create_superuser
-        equals: true
+    default: "adminpassword"
+    condition:
+      key: create_superuser
+      value: true
 
+privileged: []
 full_access: false
 
 documentation: "README.md"
-
 icon: "icon.png"
 logo: "logo.png"
+
