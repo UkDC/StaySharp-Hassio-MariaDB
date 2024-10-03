@@ -33,7 +33,7 @@ schema:
   - name: db_port
     required: true
     type: integer
-    default: 3306
+    default: "3306"
   - name: db_name
     required: true
     type: string
@@ -49,7 +49,7 @@ schema:
   - name: create_superuser
     required: true
     type: boolean
-    default: false
+    default: "false"
   - name: superuser_username
     required: false
     type: string
