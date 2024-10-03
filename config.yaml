@@ -35,7 +35,9 @@ schema:
   superuser_email: str
   superuser_password: str
 
-devices:
-  - /dev/ttyUSB0
-  - /dev/ttyUSB1
+full_access: false
 
+documentation: "README.md"
+
+icon: "icon.png"
+logo: "logo.png"
