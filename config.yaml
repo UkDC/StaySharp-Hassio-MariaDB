@@ -25,7 +25,6 @@ options:
   superuser_username: "admin"
   superuser_email: "admin@example.com"
   superuser_password: "adminpassword"
-
 schema:
   - name: db_host
     required: true
