@@ -26,17 +26,54 @@ options:
   superuser_email: "admin@example.com"
   superuser_password: "adminpassword"
 schema:
-  db_host: str
-  db_port: int
-  db_name: str
-  db_user: str
-  db_password: str
-  create_superuser: bool
-  superuser_username: str
-  superuser_email: str
-  superuser_password: str
+  db_host:
+    type: str
+    required: true
+    default: "core-mariadb"
+  db_port:
+    type: int
+    required: true
+    default: 3306
+  db_name:
+    type: str
+    required: true
+    default: "homeassistant"
+  db_user:
+    type: str
+    required: true
+    default: "user"
+  db_password:
+    type: str
+    required: true
+    default: "password"
+  create_superuser:
+    type: bool
+    required: true
+    default: false
+  superuser_username:
+    type: str
+    required: true
+    default: "admin"
+    selector:
+      text:
+        type: text
+    advanced: true
+  superuser_email:
+    type: str
+    required: true
+    default: "admin@example.com"
+    selector:
+      text:
+        type: text
+    advanced: true
+  superuser_password:
+    type: str
+    required: true
+    default: "adminpassword"
+    selector:
+      password: {}
+    advanced: true
 
-privileged: []
 full_access: false
 
 documentation: "README.md"
