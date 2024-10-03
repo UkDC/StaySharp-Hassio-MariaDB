@@ -1,6 +1,6 @@
 name: "StaySharp_MD"
 description: "Tormek T-8 sharpening and honing angle calculator with recommendations for different steel types and brands"
-version: "1.0.0"
+version: "1.0.1"
 slug: "staysharp_hassio_mariadb"
 url: "https://github.com/UkDC/StaySharp-Hassio-MariaDB"
 arch:
