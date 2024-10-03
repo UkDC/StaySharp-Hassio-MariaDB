@@ -51,21 +51,21 @@ schema:
     type: boolean
     default: false
   - name: superuser_username
-    required: true
+    required: false
     type: string
     default: "admin"
     condition:
       key: create_superuser
       value: true
   - name: superuser_email
-    required: true
+    required: false
     type: string
     default: "admin@example.com"
     condition:
       key: create_superuser
       value: true
   - name: superuser_password
-    required: true
+    required: false
     type: string
     default: "adminpassword"
     condition:
