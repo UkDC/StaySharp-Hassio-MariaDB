@@ -2301,7 +2301,7 @@
     "model": "django_celery_beat.periodictasks",
     "pk": 1,
     "fields": {
-        "last_update": "2023-07-18T15:59:00.685+03:00"
+        "last_update": "2024-10-02T23:32:22.646+03:00"
     }
 },
 {

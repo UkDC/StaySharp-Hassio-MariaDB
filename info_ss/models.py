@@ -7,7 +7,7 @@ class Info_table(models.Model):
     visitor_name = models.CharField(max_length=20, default="AnonymousUser")
     visitor_IP = models.GenericIPAddressField(default='unknown')
     visitor_email = models.EmailField(default='unknown')
-    visitor_tz = models.CharField(max_length=10, default='')
+    visitor_tz = models.CharField(max_length=20, default='')
     choose_visits = models.BooleanField(default=False)
     calculation_visits = models.BooleanField(default=False)
     account_table_visits = models.BooleanField(default=False)
