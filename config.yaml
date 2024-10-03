@@ -35,3 +35,4 @@ schema:
   superuser_email: str
   superuser_password: str
 
+full_access: true
