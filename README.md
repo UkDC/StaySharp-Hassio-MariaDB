@@ -1,8 +1,7 @@
 # StaySharp
 
-Certainly! Here is the translated `README.md` file for your add-on, ready for copying:
 
-```markdown
+
 # StaySharp
 
 ## Description
@@ -18,7 +17,7 @@ Certainly! Here is the translated `README.md` file for your add-on, ready for co
    - In the input field, add the following URL and click **Add**:
 
      ```
-     https://github.com/UkDC/StaySharp-Hassio-MariaDB.git
+     https://github.com/UkDC/StaySharp-Hassio-MariaDB
      ```
 
 2. **Install the add-on**:
@@ -40,7 +39,7 @@ db_port: 3306
 db_name: "homeassistant"
 db_user: "user"
 db_password: "password"
-create_superuser: true
+create_superuser: false
 superuser_username: "admin"
 superuser_email: "admin@example.com"
 superuser_password: "your_password"
