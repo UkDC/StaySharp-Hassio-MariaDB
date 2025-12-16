@@ -15,7 +15,7 @@ from pathlib import Path
 
 USE_TZ = True
 
-TIME_ZONE = "Europe/Kiev"
+TIME_ZONE = "Europe/Kyiv"
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
